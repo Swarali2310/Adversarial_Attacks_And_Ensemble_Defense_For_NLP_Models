@@ -74,7 +74,7 @@ The [Yelp Dataset](https://huggingface.co/datasets/yelp_polarity) consists of re
 |Even when we didn't have a car Filene's Basement was worth the bus trip to the Waterfront. I always ... | 2
 
 ### Evaluated Models
-<img src=images/BDA-model.png align=center>
+![](images/BDA-model.png =250x250)
 
 ### Analysis on Text fooler attack performance
 Text fooler attack performance can be varied based on different parameters like similarity threshold, word embedding distance, number of perturbed words etc. As part of this project, a study on text fooler attack performance is performed under different settings like max number of perturbed words, word embedding distance, allowed similarity of adversarial sentence by cosine similarity, under pre-transformations and search methods.
