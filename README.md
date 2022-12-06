@@ -120,11 +120,11 @@ Roberta-base
 <img src=images/Roberta-hard.PNG align=center>
 ### Medium case - When few of the models used in ensemble failed to defend the attack
 Bert-base-uncased
-<img src=images/bert-medium.PNG align=left>
+<img src=images/bert-medium.PNG align=center>
 Alberta-base-cased
-<img src=images/alberta-medium.PNG align=left>
+<img src=images/alberta-medium.PNG align=center>
 Roberta-base
-<img src=images/roberta-medium.PNG align=left>
+<img src=images/roberta-medium.PNG align=center>
 
 
 
