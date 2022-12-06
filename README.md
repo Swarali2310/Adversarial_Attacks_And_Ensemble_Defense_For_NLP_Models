@@ -116,6 +116,27 @@ We analyzed various Bert Models on two dataset mainly YELP Polarity and IMDB. Th
 
 <img width="704" alt="final4" src="https://user-images.githubusercontent.com/14026267/206046775-7d2075f3-2f4d-459b-b91e-ba265e63560f.png">
 
+#### Training Summary of BERT Models
+Traning of these models was one of the most importasnt part of this project and we did spend fair amount of time on that. Following are the details on how our training of these Bert Model took place:
+
+|System Paramter            |                                                              |
+|---------------------------|--------------------------------------------------------------|
+| Transformer Library       |        Hugging Face                                          |  
+| Training Enviroment       |        Colab/Kaggle                                          | 
+| Compute Used.             |        GPU P100                                              |  
+| Training HyperParameter   |        BatchSize, Epochs, Label Number, Max Sequence Length  | 
+| Evalution Size            |        100                                                   |
+| Attack Sample size        |        100                                                   | 
+
+Following is the table for Training HyperParameter used:
+
+|Training Hyper Paramter            |    Value                                                     
+|-----------------------------------|--------------|
+| Batch Size                        |      128     |  
+| Number of Epoch                   |      3       | 
+| Number of Label                   |      2       | 
+| Max Sequence Length               |      64/2480 |
+
 
 
 ### Ensemble Model
