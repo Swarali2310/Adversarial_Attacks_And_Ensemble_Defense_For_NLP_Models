@@ -90,15 +90,15 @@ All the experiments were performed on top of HuggingFace transformers library (h
 ### Sample Comparison of 2 models behaviours against text fooler attack on IMDB dataset
 #### Easy Case - when the models disagree
 ##### BERT uncased
-<img src=images/f1.png align=center>
+<img src=images/f1.png align=center/>
 ##### RoBERTa base
-<img src=images/f2.png align=center>
+<img src=images/f2.png align=center/>
 
 #### Hard Case - when the models agree
 ##### BERT uncased
-<img src=images/f3.png align=center>
+<img src=images/f3.png align=center/>
 ##### RoBERTa base
-<img src=images/f4.png align=center>
+<img src=images/f4.png align=center/>
 
 ### Analysis on Text fooler attack performance
 Text fooler attack performance can be varied based on different parameters like similarity threshold, word embedding distance, number of perturbed words etc. As part of this project, a study on text fooler attack performance is performed under different settings like max number of perturbed words, word embedding distance, allowed similarity of adversarial sentence by cosine similarity, under pre-transformations and search methods.
