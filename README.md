@@ -74,7 +74,7 @@ The [Yelp Dataset](https://huggingface.co/datasets/yelp_polarity) consists of re
 |Even when we didn't have a car Filene's Basement was worth the bus trip to the Waterfront. I always ... | 2
 
 ### Evaluated Models
-<img src=images/BDA-model.png align=center width="600" height="600">
+<img src=images/BDA-model.png align=center width="800" height="500">
 
 
 ### Analysis on Text fooler attack performance
