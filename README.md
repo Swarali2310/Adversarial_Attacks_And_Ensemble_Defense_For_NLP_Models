@@ -112,9 +112,15 @@ We observed that by varying the search methods from greedy search to greedy-word
 
 ### Modelling of BERT Models and evaluating with TextFooler
 
+We analyzed various Bert Models on two dataset mainly YELP Polarity and IMDB. The diagram gives a brief idea of different Bert Models used. Most of these models have been fined tuned on some particular dataset like Bert on Amazon polarity has only been trained on Amazon Polarity dataset. We tried to use such models also for our attack analysis to see how well these attack model works on models which have been trained on a particular dataset.
+
+<img width="704" alt="final4" src="https://user-images.githubusercontent.com/14026267/206046775-7d2075f3-2f4d-459b-b91e-ba265e63560f.png">
+
+
+
 ### Ensemble Model
-* As we understood with our evaluation of above models and their accuracies under the attacks, it is clear that any single BERT model can't withstand or good enough to tackle the attack. It is also learnt from the text fooler paper [add reference], that with overall perturbations less than 20% the accuracies of the state-of-the-art models drop below 10%. Thus, moving towards an ensemble solution will be an ideal defense stratey to tackle such adversarial attacks.
-* However, just ensembling the state-of-the-art models may also not be the best solution with different cases. Let's demonstrate such cases below:
+
+### Experimental Results
 
 ### Easy case
 * We consider the easy case as when the attacking is benign or not sufficient enough to misguide the models. Below shows the models classifying the sentence correctly marking the attack as failed
@@ -169,6 +175,53 @@ Roberta-base
 
 * Used Amazon Cloud Storage S3  over HDFS for storing the dataset because of its elasticity, better availability and durability, 2X performance and its lower cost.
 
+### Cosine Similarity using MapReduce
+
+This approach uses item-item collaborative filtering to provide the recommendations for a user.  All the compute intensive tasks are split between mapper nodes and the data is collected and collated by the master or reducer code. Hence, Map reduce. The same is implemented using spark.
+
+We used item-item collaborative filtering over user-user collaborative filtering for a number of reasons:
+
+* Performance: It performs better than user-user similarity and hence is a popular choice for high load services.
+* Cold start problem: Item-item collaborative filtering handles the cold start problem better as when a new user enters into the system, he can be asked to choose a few songs he finds interesting and based on our pre-computed data for song-song similarity we can recommend similar songs to the user. 
+* Number of computations: The number of songs is lesser than the number of users in our dataset. Hence, the number of computations is much lesser for item-item collaborative filtering approach  
+* Item-item similarity remains more constant as opposed to user-user similarity which changes frequently. 
+* Accuracy: In item-item approach as the recommendations are more accurate.
+* Security: Resistance of this approach to shilling attack. Shilling attack is where the attackers try to manipulate recommendations by adding user-rating content maliciously. Here again its based on the user’s choice himself it is resistant to shilling attacks. 
+
+
+### Cosine Similarity using MapReduce - Architecture
+![](Cosine%20Similarity%20using%20mapreduce%20-%20architecture.png)
+
+The basic methodology includes two steps: 
+* data transformation
+* cosine similarity algorithm application
+ 
+We started with the data set consisting of user, song and rating information. We calculated all the pairs of songs listened by the users and the corresponding ratings of songs. This is done for all the users and all the songs they have listened to. Once we have this list consisting of song pairs and rating pairs, for each song pair we form a vector of ratings pairs collected by a number of users. Next the cosine similarity algorithm is applied on this vector to find the similarity score of the song pair.	
+
+While providing the recommendation for a user, we consider the user’s top songs and recommend other songs which are similar to his listening history. Further, we apply other filters like similarity score greater than certain threshold, song pair appearance > certain count to make the recommendations more relevant. We are using implicit data that is the song count and normalizing it. Ideally cosine similarity works better with explicit data, however due to lack of dataset with this information we used implicit data.
+
+
+### More about Cosine Similarity
+
+#### Data shuffling issue
+In item-item collaborative filtering each mapper node contains information about a subset of items. Hence, during different item-item calculations it  requires shuffling of item data over different worker nodes. This data shuffling is a very expensive operation and hence slows down the process.
+
+![](Cosine%20Similarity%20using%20mapreduce.png)
+
+### Cosine Similarity code snippets
+* Data Transformation
+
+```
+rdd = sc.textFile(data_path)\
+            .map(lambda x: x.split(",")).map(lambda x : ((x[1]),(x[2],x[3]))) 
+songpair = rdd.join(rdd)
+songpair_withoutdups = songpair.filter(remove_duplicates)
+just_songpairs = songpair_withoutdups.map(justsongpairs)
+groupOfRatingPairs = just_songpairs.groupByKey()
+songPairsAndSimilarityScore = groupOfRatingPairs.mapValues(findCosineSimilarity)
+```
+
+* Cosine Similarity Algorithm
 
 ```
     for pair in rdd:
@@ -201,6 +254,19 @@ Roberta-base
         song_id = song
         displayTop10(top50,song_id)
 ```
+
+### Recommendations from Cosine Similarity
+![](mp_recommendations.png)
+
+This the recommendation results which we obtained from map reduce approach for the same user which we considered in ALS approach. We observed that the recommendations we obtained from both the approaches were similar in terms of artists, genre etc. And we got 3 out of top 5 recommendations to be exactly similar.  
+
+
+### Friend based collaborative filtering
+
+As observed from previous experiments and results, user-based and item-based Collaborative Filtering is computationally expensive, hence this enabled us to explore other solutions for large scale collaborative filtering.
+
+Friend-Based CF is based on the assumption that an individuals taste/liking is strongly influence by the people around him. It is more likely that an individuals taste in music is more similar to his friend rather than a stranger in a different country. Hence, if we can define these relations and form smaller cluster then it is possible to use CF to compare an individual only to his friends and connections in order to determine similarity. This would reduce the computation time as the number of people per cluster would be significantly less and not every user needs to be compared to every other user. Hence, a friend based collaborative filtering would be more efficient, accurate and scalable. 
+
 
 ### Friend based collaborative filtering - Architecture
 ![](friend_based_architecture.png)
@@ -276,6 +342,32 @@ def get_second_degree(graph, userID):
 
 ### Evaluation Results
 
+#### ALS Experimentation Results
+
+<img src="ALS_TrainTime.png" width="400">
+
+<img src="RMSE%20Calculation%20Time.png" width="400">
+
+We can see how the training time of the algorithm decreases with increasing number of nodes in the cluster.
+
+The second graph shows the time taken to calculate the RMSE on the test data vs the number of nodes in the cluster. It is visible here as well how the time taken decreases along with the increasing number of nodes in the cluster.
+
+<img src="numCores.PNG" width="500">
+
+<img src="sparkUIcapture.PNG" width="500">
+
+The above images show the execution of the tasks performed by spark along with the number of cores used and how the tasks are parallelized.
+
+#### Cosine Similarity Experimentation Results
+
+<img src="MapReduce%20Exp%20results.png" width="407">
+
+| No of Nodes | Time Taken(sec) | Time Taken(sec) |
+|-------------|-----------------|-----------------|
+|             | 48M rows        | 1M rows         |
+| 4           | -               | 101             |
+| 8           | ~6300           | 57              |
+
 #### Result Analysis
 
 Fig: Training + prediction times for 10 million rows on 2,4,6 and 8 nodes on cluster
@@ -283,6 +375,13 @@ The entire dataset - 48M rows couldn’t be processed on our cluster with 2, 4 o
 We could only calculate the item-item similarity on the entire dataset by using 8 nodes of 16GB RAM each which took a high computation time of around 6300s.
 The results do not linearly scale up when compared to a smaller dataset of 1M rows because of polynomial increase in number of shuffles and comparisons (n^2 comparisons) and increased IPC overhead during data shuffling. The join operation time increases quadratically (n^2) with dataset size.  
 
+
+#### ALS Vs MapReduce
+
+|                     | Time taken for 8 nodes |
+|---------------------|------------------------|
+| ALS                 | ~791                   |
+| Cosine - Similarity | ~6308                  |
 
 #### Friend based Experimentation Results
 
@@ -298,6 +397,20 @@ The top 10 most similar users were - 1210, 1866, 374, 1643, 1209, 428, 1585, 176
 For user 128, we computed the similarity matrix considering only the users in his cluster (250 users).
 The top 10 most similar users were - 1210, 1866, 374, 1643, 1209, 428, 1585, 176, 196, 666
 
+10-most similar users in both scenarios:
+
+![](fb-1.png)
+
+As observed from the Venn Diagram above - 9 out of 10 users are similar in both the cases. Hence, we can say that a smaller subset cluster would be better/equivalent to using the whole dataset consisting all users.
+
+General recommendations for different cases using Friend-Based CF
+
+![](fb-table.png)
+
+Disadvantages of Friend-Based CF
+
+People with limited friends i.e., smaller clusters still face the cold-start problem (as seen above for the hard case).
+Several other factors like geographic location, state of mind etc. can influence a person’s taste of songs.
 
 ### Conclusion
 
