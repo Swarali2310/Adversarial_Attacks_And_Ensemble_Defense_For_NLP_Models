@@ -276,32 +276,6 @@ def get_second_degree(graph, userID):
 
 ### Evaluation Results
 
-#### ALS Experimentation Results
-
-<img src="ALS_TrainTime.png" width="400">
-
-<img src="RMSE%20Calculation%20Time.png" width="400">
-
-We can see how the training time of the algorithm decreases with increasing number of nodes in the cluster.
-
-The second graph shows the time taken to calculate the RMSE on the test data vs the number of nodes in the cluster. It is visible here as well how the time taken decreases along with the increasing number of nodes in the cluster.
-
-<img src="numCores.PNG" width="500">
-
-<img src="sparkUIcapture.PNG" width="500">
-
-The above images show the execution of the tasks performed by spark along with the number of cores used and how the tasks are parallelized.
-
-#### Cosine Similarity Experimentation Results
-
-<img src="MapReduce%20Exp%20results.png" width="407">
-
-| No of Nodes | Time Taken(sec) | Time Taken(sec) |
-|-------------|-----------------|-----------------|
-|             | 48M rows        | 1M rows         |
-| 4           | -               | 101             |
-| 8           | ~6300           | 57              |
-
 #### Result Analysis
 
 Fig: Training + prediction times for 10 million rows on 2,4,6 and 8 nodes on cluster
@@ -309,13 +283,6 @@ The entire dataset - 48M rows couldn’t be processed on our cluster with 2, 4 o
 We could only calculate the item-item similarity on the entire dataset by using 8 nodes of 16GB RAM each which took a high computation time of around 6300s.
 The results do not linearly scale up when compared to a smaller dataset of 1M rows because of polynomial increase in number of shuffles and comparisons (n^2 comparisons) and increased IPC overhead during data shuffling. The join operation time increases quadratically (n^2) with dataset size.  
 
-
-#### ALS Vs MapReduce
-
-|                     | Time taken for 8 nodes |
-|---------------------|------------------------|
-| ALS                 | ~791                   |
-| Cosine - Similarity | ~6308                  |
 
 #### Friend based Experimentation Results
 
@@ -331,20 +298,6 @@ The top 10 most similar users were - 1210, 1866, 374, 1643, 1209, 428, 1585, 176
 For user 128, we computed the similarity matrix considering only the users in his cluster (250 users).
 The top 10 most similar users were - 1210, 1866, 374, 1643, 1209, 428, 1585, 176, 196, 666
 
-10-most similar users in both scenarios:
-
-![](fb-1.png)
-
-As observed from the Venn Diagram above - 9 out of 10 users are similar in both the cases. Hence, we can say that a smaller subset cluster would be better/equivalent to using the whole dataset consisting all users.
-
-General recommendations for different cases using Friend-Based CF
-
-![](fb-table.png)
-
-Disadvantages of Friend-Based CF
-
-People with limited friends i.e., smaller clusters still face the cold-start problem (as seen above for the hard case).
-Several other factors like geographic location, state of mind etc. can influence a person’s taste of songs.
 
 ### Conclusion
 
