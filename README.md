@@ -105,8 +105,7 @@ We observed that by varying the search methods from greedy search to greedy-word
 ### Experimental Results
 
 ### Easy case
-* We consider the easy case as when the attacking is benign or not sufficient enough to misguide the models
-* Below shows the models classifying the sentence correctly marking the attack as failed
+* We consider the easy case as when the attacking is benign or not sufficient enough to misguide the models. Below shows the models classifying the sentence correctly marking the attack as failed
 
 * Bert-base-uncased
 <img src=images/bert-easy.PNG align=center>
@@ -118,10 +117,8 @@ We observed that by varying the search methods from greedy search to greedy-word
 <img src=images/roberta-easy.PNG align=center>
 
 ### Hard case
-* Hard case is considered when the attacking is clever with replacing the words
-* The models are clearly misguided in classifying the adverse sentences
-* However, the humans can observe the context of the sentences and classify correctly
-* Below shows the samples of such attacking examples misclassifed by the considered models
+* Hard case is considered when the attacking is clever with replacing the words and misguiding the models
+* However, the humans can observe the overall context of the sentences is preserved and can classify correctly illustrating the hardness of the attack. Below shows the samples of such attacking examples misclassifed by the considered models
 
 * Bert-base-uncased
 <img src=images/bert-hard.PNG align=center>
