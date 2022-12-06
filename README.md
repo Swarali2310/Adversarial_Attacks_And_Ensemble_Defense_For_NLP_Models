@@ -8,8 +8,8 @@ There is sample literature exploring adversarial attacks on image deep neural ne
 ### BERT Architecture
 BERT stands for Bidirectional Encoder Representations from Transformers. It is a deep learning based unsupervised language model developed by researchers at Google AI. 
 
-<!-- <img src=images/bert_arch.png> -->
-![](images/bert_arch.png)
+<img src=images/bert_arch.png align=center>
+<!-- ![](images/bert_arch.png) -->
 
 *What is meant by bidirectional?*
 
