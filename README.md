@@ -140,6 +140,7 @@ Following is the table for Training HyperParameter used:
 
 #### Accuracy Analysis (YELP and BERT)
 
+on YELP Dataset 
 
 |Model                      |Accuracy before attack(%)|Average after attack(%)  |Run Time|
 |---------------------------|------------------------ |-------------------------|-------------------------|
@@ -154,7 +155,22 @@ Following is the table for Training HyperParameter used:
 | Tiny BERT                 |        88.34            |     0.0                 |  17 min                 |
 | BERT multilingual         |        91.59            |     0.0                 |  1 hr 49 min            |
 
+The above table basically provides 
 
+on IMDB Dataset 
+
+|Model                      |Accuracy before attack(%)|Average after attack(%)  |Run Time|
+|---------------------------|------------------------ |-------------------------|-------------------------|
+| Bert on YELP Polarity     |        81.76            |     0.00                |  12 min                 |
+| RoBERTa base              |        86.75            |     1.00                |  13 min                 |
+| XLnet BERT                |        85.63            |     0.00                |  1 hr                   |
+| Distil RoBERTa            |        94.34            |     0.00                |  1 hr 33 min            |
+| BERT on Amazon Polarity   |        84.92            |     2.00                |  8 min                  |
+| BERT uncased              |        82.49            |     0.2                 |  7 min                  |
+| BERT cased                |        83.88            |     4.0                 |  8 min                  |
+| AlBERT base               |        84.08            |     1.0                 |  15 min                 |
+| Tiny BERT                 |        75.36            |     0.0                 |  1 min                  |
+| BERT multilingual         |        91.94            |     5.0                 |  1 hr                   |
 
 
 
