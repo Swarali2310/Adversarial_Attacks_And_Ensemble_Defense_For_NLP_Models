@@ -104,7 +104,7 @@ We observed that by varying the search methods from greedy search to greedy-word
 
 ### Experimental Results
 
-### Easy case - when all the models presented in the ensemble disagree
+### When all the models presented in the ensemble fail to attack the model
 Bert-base-uncased
 <img src=images/bert-easy.PNG align=center>
 Alberta-base-cased
