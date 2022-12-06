@@ -104,20 +104,34 @@ We observed that by varying the search methods from greedy search to greedy-word
 
 ### Experimental Results
 
-### Easy case - When all the models used in ensemble successfully defended the attack
-Bert-base-uncased
+### Easy case
+* We consider the easy case as when the attacking is benign or not sufficient enough to misguide the models
+* Below shows the models classifying the sentence correctly marking the attack as failed
+
+* Bert-base-uncased
 <img src=images/bert-easy.PNG align=center>
-Alberta-base-cased
+
+* Alberta-base-cased
 <img src=images/alberta-easy.PNG align=center>
-Roberta-base
+
+* Roberta-base
 <img src=images/roberta-easy.PNG align=center>
-### Hard case - When all the models used in ensemble failed to defend the attack
-Bert-base-uncased
+
+### Hard case
+* Hard case is considered when the attacking is clever with replacing the words
+* The models are clearly misguided in classifying the adverse sentences
+* However, the humans can observe the context of the sentences and classify correctly
+* Below shows the samples of such attacking examples misclassifed by the considered models
+
+* Bert-base-uncased
 <img src=images/bert-hard.PNG align=center>
-Alberta-base-cased
+
+* Alberta-base-cased
 <img src=images/alberta-base-hard.PNG align=center>
-Roberta-base
+
+* Roberta-base
 <img src=images/Roberta-hard.PNG align=center>
+
 ### Medium case - When few of the models used in ensemble failed to defend the attack
 Bert-base-uncased
 <img src=images/bert-medium.PNG align=center>
