@@ -110,6 +110,10 @@ We observed that by varying the search methods from greedy search to greedy-word
 | Greedy search     |        60              |  
 | Greedy word swap  |        70              | 
 
+### Modelling of BERT Models and evaluating with TextFooler
+
+### Ensemble Model
+
 ### Experimental Results
 
 ### Easy case
