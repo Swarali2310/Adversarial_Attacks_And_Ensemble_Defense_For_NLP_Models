@@ -169,64 +169,6 @@ Roberta-base
 
 * Used Amazon Cloud Storage S3  over HDFS for storing the dataset because of its elasticity, better availability and durability, 2X performance and its lower cost.
 
-### Solution Proposal
-
-We present three methods for implementing the recommendation system :
-
-* Alternating Least Squares
-* Cosine Similarity using MapReduce
-* Friend Based Collaborative Filtering
-
-### ALS Architecture
-![](ALS%20Architecture.png)
-
-"Alternating least squares (ALS)" is a distributed matrix factorization method that allows for faster and more efficient computations. The major goal of creating such an algorithm is to overcome some of the disadvantages that kNN-based approaches have, such as popularity bias, cold-start concerns, scalability challenges, sparseness in the matrix, and long calculation times.
-
-Spark is a widely used distributed framework that is both dependable and fault-tolerant. As a result, the ALS algorithm was built using the Apache Spack ML package and is intended for large-scale collaborative filtering. It has a basic, elegant design that scales well to enormous datasets.
-
-In ALS, L2 regularization is employed to lower two loss functions alternatively. In an MF technique, when a matrix R is partitioned into smaller matrices U and V, R = UV', the cost function is a non-convex function. The problem becomes a linear regression problem with an "Ordinary Least Squares (OLS)" solution if one of them, say U, is fixed.
-
-Alternating least squares accomplishes just that. It's a two-step iterative optimization approach. It initially fixes U and then solves for V, then fixes V and then solves for V in each cycle. The algorithm is called "Alternating" because it solves matrices in different ways. Because the OLS solution is unique and guarantees a low MSE, the cost function can decrease or remain unchanged in each step, but it never rises. The cost function is lowered by switching back and forth between the two processes until convergence. It is certain that it will only converge to a local minimum and that the initial values of U or V will ultimately define it.
-
-In 2014, Spotify used an ALS-based approach called full-gridify. The users are divided into small clusters along the rows, as indicated by rectangular boxes. 
-
-In addition, all of the goods rated by the users are organized into columns. The user groups are now transmitted to individual worker nodes, together with the needed item vectors for the ALS calculation, once such a grouping has been established. Even if the item vectors are replicated across worker nodes, the grouping avoids the worker nodes from storing all of the items in memory. Furthermore, because it only stores information for a specific set of users, it requires less memory, and all of the data may be cached for speedier access. Furthermore, because it only stores information for a specific set of users, it requires less memory, and all of the data may be cached for speedier processing. Because all data is stored in a worker node, there is no need for data shuffling, reducing the IPC overhead of distributed systems.
-
-### More about ALS
-<img src="ALS-1.png" width="500">
-
-* Dataset for music recommendation is an implicit feedback data -   a major reason for use to try LS is because the data is implicit. Implicit feedback doesn’t directly reflect the interest of the user but is the information produced after observing the users' behavior. In explicit we have negative feedback, in implicit we don’t (listen count one can imply liked or didn’t like. The model treats implicit data as a binary ratings matrix. It uses the listen count as a confidence value which is incorporated in the loss function which needs to be minimized.  As the listen count grows, we have a stronger indication that the user indeed likes the song.
-* All users haven’t heard all songs hence user-song matrix is sparse - For each user, we have number of songs plays for only a subset of the songs as any user could not have heard all possible songs, so the user song matrix that we have is sparse. Goal is to predict the number of listens for a user song pair in the sparse matrix. With ALS, the idea is to approximate the matrix by factorizing it as the product of two matrices: one that describes properties of each user, and one that describes properties of each song.
-* Predicts number of listens using Matrix Factorization – These two lower order matrices can be used to predict values in the original matrix. We want to select these two matrices such that the error for the users/songs pairs where we know the correct number of plays is minimized.
-* It is an iterative algorithm (alternates back and forth between user and song vectors for solving) – To get the values for these weights, or features,  Alternating Least Squares algorithm does this by first randomly filling the users matrix with values and then optimizing the value of the songs such that the error is minimized. Then, it holds the songs matrix constant and optimizes the value of the user's matrix. This alternation between which matrix to optimize is the reason for the "alternating" in the name. Alternate back and forth until we converge and the product of the two matrices approximates the original one as closely as possible. When we feed the entire original sparse user-song matrix into spark, it is partitioned into chunks and sent to different worker nodes. Each partition contains the required data to calculate the values of the user vectors present in that partition. Only item vectors required for that block are sent to this particular worker where the ratings are cached and all the processed happens on this cached data. Since all user specific data exists on this node, no shuffling of data over the wire takes place for grouping.
-
-
-<img src="RMSE_vs_Nodes.png" width="300">
-
-|Parameter|Value|
-|-------|----------|
-|Rank (latent factors)| 16|
-|Regularization Parameter| 0.25|
-|Max Iterations| 20|
-|alpha| 40|
-
-We used crossvalidator and grid search to run multiple iterations and find the optimal parameters for our model. 
-
-After trying different rank values - which is the number of latent factors - rank 16 produced the best results.
-
-
-### Recommendations from ALS
-
-| UserID | Actual top 5 songs | Artist Name               | Recommended Songs  | Artist Name               |
-|--------|--------------------|---------------------------|--------------------|---------------------------|
-| 7179   | Heartbreak Warfare | John Mayer                | Sehr kosmisch      | Harmonia                  |
-| 7179   | The Cove           | Jack Johnson              | Moonshine          | Jack Johnson              |
-| 7179   | Sehr kosmisch      | Harmonia                  | Heartbreak Warfare | John Mayer                |
-| 7179   | Country Road       | Jack Johnson / Paula Fuga | Country Road       | Jack Johnson / Paula Fuga |
-| 7179   | Holes To Heaven    | Jack Johnson              | Sun Hands          | Local Natives             |
-
-If we look at the predictions given by ALS for one particular user, we can see that the top 5 predicted songs very closely resemble the actual most listened songs by that user. Even if the prediction doesn’t exactly match, it recommends similar songs by the same artist or genre. We didn’t didn’t remove the songs the user has already heard from our recommendation so that we could evaluate the performance.
-
 ### Cosine Similarity using MapReduce
 
 This approach uses item-item collaborative filtering to provide the recommendations for a user.  All the compute intensive tasks are split between mapper nodes and the data is collected and collated by the master or reducer code. Hence, Map reduce. The same is implemented using spark.
