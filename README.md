@@ -36,7 +36,7 @@ The [IMDB Dataset](https://huggingface.co/datasets/imdb) has 50k movie reviews f
 
 * **80.23 MB** Dataset Size
 
-### Data snippet
+### Snippet of Data Samples and Labels
 
 |  **Review**                                                                                            |  **Sentiment** |                         
 |--------------------------------------------------------------------------------------------------------|----------------|
@@ -56,7 +56,7 @@ The [Yelp Dataset](https://huggingface.co/datasets/yelp_polarity) consists of re
 
 * **158.67 MB** Dataset Size
 
-### Data snippet
+### Snippet of Data Samples and Labels
 
 |  **Review**                                                                                            |  **Sentiment** |                         
 |--------------------------------------------------------------------------------------------------------|----------------|
