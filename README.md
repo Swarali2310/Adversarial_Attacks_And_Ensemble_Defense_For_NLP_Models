@@ -6,29 +6,54 @@ Adversarial attacks are the phenomenon in which machine learning models can be t
 There is sample literature exploring adversarial attacks on image deep neural networks (DNN) systems for object detection systems. Comparisons and trade-offs between different proposed attack types have been made and documented regularly over the past years. However, when it comes to adversarial attack effects on BERT NLP models, comparison surveys are scarce and sparse. Our primary motivation to perform this analysis is the fact that it is an area which hasn't been thoroughly explored yet. The insights that will be gained from our study will help both the designers of adversarial attacks to strengthen their methods in the future and to identify specific weaknesses in a BERT based text classification model. We also hope to make informative deductions based on the different datasets that will be used during experimentation.
 
 
-### Spark Overview
+<!-- ### Spark Overview
 ![](Spark_Distributed_Architecture.png)
 
 We build a distributed recommendation system over Apache Spark. All applications run on spark as independent processes. Spark consists of a master node and multiple worker nodes. The master node consists of a driver program which is connected to a cluster manager which is responsible for allocating resources to the worker nodes, creating tasks and distributing them to worker nodes. These tasks are then executed on the worker nodes and results are returned to the driver program which consolidates them and gives back the result.
+ -->
 
+### IMDB Movie Reviews Dataset
+The [IMDB Dataset](https://huggingface.co/datasets/imdb) has 50k movie reviews for natural language processing or Text Analytics. This dataset is for binary sentiment classification containing substantially more data than the previous bench marks datasets. It contains a set of 25k highly polar movie reviews for training and 25k for testing.
 
-### Million Song Dataset
-The [Million Song Dataset](http://millionsongdataset.com/) consists of audio features and metadata for a million contemporary popular music tracks.
-It has information about tracks, song id, song title, artist id, artist name, danceability, year of release, user id, song play count etc.
+* **49,582** unique reviews
 
-* **1,019,318** unique users
+* **12,500** reviews with sentiment positive
 
-* **384,546** unique MSD songs
+* **12,500** reviews with sentiment negative
 
-* **48,373,586** user - song - play count triplets
-
-* **5 GB** Dataset Size (excluding audio tracks)
-
-All the files are in HDF5 format. They are first converted to CSV format. To get the data for our use, we joined the metadata file and triplets file on the song id. We used the entire 5GB dataset for training the model.
+* **80.23 MB** Dataset Size
 
 ### Data snippet
 
-|  **userID**   |  **SongID**    |  **Rating**  |  **trackID**  |  **artistName**              |  **songTitle**                         |
+|  **Review**                                                                                            |  **Sentiment** |                         
+|--------------------------------------------------------------------------------------------------------|----------------|
+|One of the other reviewers has mentioned that after watching just 1 Oz episode you'll be hooked. The... | positive
+|A wonderful little production. <br /><br />The filming technique is very unassuming- very old-time-B... | positive
+|Basically there's a family where a little boy (Jake) thinks there's a zombie in his closet & his par... | negative
+|This show was an amazing, fresh & innovative idea in the 70's when it first aired. The first 7 or 8 ... | negative
+
+### Yelp Review Sentiment Dataset
+The [Yelp Dataset](https://huggingface.co/datasets/yelp_polarity) consists of reviews from Yelp. It is extracted from Yelp Dataset challenge 2015 data. This dataset is for binary sentiment classification consisting with 598k highly polar yelp reviews out of which 560k are for training and 38k are for testing. This dataset is constructed by considering stars 0-2 as negative, and 3-4 as positive. Negative polarity is class 1 and positive polarity is class 2.
+
+* **37,999** unique reviews
+
+* **2,80,000** reviews with sentiment positive
+
+* **2,80,000** reviews with sentiment negative
+
+* **158.67 MB** Dataset Size
+
+### Data snippet
+
+|  **Review**                                                                                            |  **Sentiment** |                         
+|--------------------------------------------------------------------------------------------------------|----------------|
+|Last summer I had an appointment to get new tires and had to wait a super long time. I also went in ... | 1
+|Friendly staff, same starbucks fair you get anywhere else. Sometimes the lines can get long.            | 2
+|The food is good. Unfortunately the service is very hit or miss. The main issue seems to be with the... | 1
+|Even when we didn't have a car Filene's Basement was worth the bus trip to the Waterfront. I always ... | 2
+<!-- ### Data snippet
+
+|  **Review**   |  **Sentiment**    |                          |
 |-----------|------------|----------|-----------|--------------------------|------------------------------------|
 |  250..48  |  SOAK..95  | 1        |  TRIQ..D  |  Jack Johnson            |  The Cove                          |
 |  250..48  |  SOFR..C0  | 1        |  TRDM..1  |  Harmonia                |  Sehr kosmisch                     |
@@ -37,7 +62,7 @@ All the files are in HDF5 format. They are first converted to CSV format. To get
 |  250..48  |  SOAX..A1  | 1        |  TRHK..F  |  Florence + The Machine  |  Dog Days Are Over (Radio   Edit)  |
 |  250..48  |  SODJ..CE  | 1        |  TRVC..6  |  Train                   |  Hey_ Soul Sister                  |
 |  250..48  |  SONY..C9  | 5        |  TROA..3  |  OneRepublic             |  Secrets                           |
-|  250..48  |  SORM..95  | 1        |  TRJY..F  |  Jorge Gonzalez          |  Esta Es Para Hacerte Féliz        |
+|  250..48  |  SORM..95  | 1        |  TRJY..F  |  Jorge Gonzalez          |  Esta Es Para Hacerte Féliz        | -->
 
 ### Technology Stack
 * Used Spark framework over Hadoop MapReduce - which is an iterative algorithm. Each iteration requires a hadoop job which involves continuous reading and writing to the disk which becomes a bottleneck. Spark loads user-song matrix in memory and caches it. 
