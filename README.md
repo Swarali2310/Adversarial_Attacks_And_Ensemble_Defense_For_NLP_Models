@@ -18,6 +18,13 @@ Up until the conception of BERT, all models either read sentences from left to r
 
 BERT uses the transformer architecture, but only the encoder part of it. BERT also has a very unique way of representing embeddings. Apart from token embeddings which are somewhat common across all NLP applications, there are also segment and position embeddings. Segment embeddings indicate which sentence the current token is part of. Position embeddings indicate the relative position of the token in the entire sequence. Like I mentioned before, BERT doesn’t use the decoder of the transformer architecture. Instead, in the text classification case for example, the classifier layer acts as a decoder. Another salient feature of BERT is that is uses the masked LM strategy. This means that 15% of the tokens are masked and BERT predicts these tokens on the basis of their surrounding unmasked tokens.
 
+### Proposed Design
+
+<img width="400" alt="final1" src="https://user-images.githubusercontent.com/14026267/206037991-742dbb37-335c-4e94-9311-bdbcf3a5ac39.png">
+
+The design takes into account various component which are called Models in our project. One is DataSet Model that will return different type of dataset we want to train our model. Next is the our Attack Model in which we define our TextFooler attack. We have a Transformer that loads Auto Tokenizer and Model to attack which then is passed onto the HuggingFace ModelWrapper used for this project. We then build the model on the attack and run our attacker model for final evalution.
+
+
 ### TextFooler
 TextFooler is an adversarial attack technique which identifies the most important words in the input data and replaces them by grammatically correct synonyms. What is meant by the importance of a word in this case? The words which contribute most to the label or class of the sentence are relatively more important than others. The TextFooler attack operates in 2 steps, one is the identification of the important words and the second is replacement. The replacement process is further broken down into 3 steps. First, a synonym of the important word is sampled. This includes a ranking system to check which synonym fits best. Next, part-of-speech checking is carried out to make sure that the identified synonym fits grammatically correctly in the said sentence. Finally semantic similarity checking is performed, where the semantic structure of the adversarial example is compared to the original sentence.
 
