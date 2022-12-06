@@ -106,11 +106,11 @@ We observed that by varying the search methods from greedy search to greedy-word
 
 ### Easy case - when all the models presented in the ensemble disagree
 Bert-base-uncased
-<img src=images/bert-easy.png align=center>
+<img src=images/bert-easy.PNG align=center>
 Alberta-base-cased
-<img src=images/alberta-easy.png align=center>
+<img src=images/alberta-easy.PNG align=center>
 Roberta-base
-<img src=images/roberta-easy.png align=center>
+<img src=images/roberta-easy.PNG align=center>
 
 
 
