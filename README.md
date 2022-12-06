@@ -6,8 +6,13 @@ Adversarial attacks are the phenomenon in which machine learning models can be t
 There is sample literature exploring adversarial attacks on image deep neural networks (DNN) systems for object detection systems. Comparisons and trade-offs between different proposed attack types have been made and documented regularly over the past years. However, when it comes to adversarial attack effects on BERT NLP models, comparison surveys are scarce and sparse. Our primary motivation to perform this analysis is the fact that it is an area which hasn't been thoroughly explored yet. The insights that will be gained from our study will help both the designers of adversarial attacks to strengthen their methods in the future and to identify specific weaknesses in a BERT based text classification model. We also hope to make informative deductions based on the different datasets that will be used during experimentation.
 
 ### BERT Architecture
-BERT stands for Bidirectional Encoder Representations from Transformers. It is a deep learning based unsupervised language model developed by researchers at Google AI. *What is meant by bidirectional?* 
+BERT stands for Bidirectional Encoder Representations from Transformers. It is a deep learning based unsupervised language model developed by researchers at Google AI. 
+
+*What is meant by bidirectional?*
+
 Up until the conception of BERT, all models either read sentences from left to right or right to left which limited the context in which each word of the sentence was viewed. BERT is bidirectional or more precisely non-directional as it considers all surrounding words as context without being biased to any direction.
+
+
 BERT uses the transformer architecture, but only the encoder part of it. BERT also has a very unique way of representing embeddings. Apart from token embeddings which are somewhat common across all NLP applications, there are also segment and position embeddings. Segment embeddings indicate which sentence the current token is part of. Position embeddings indicate the relative position of the token in the entire sequence. Like I mentioned before, BERT doesn’t use the decoder of the transformer architecture. Instead, in the text classification case for example, the classifier layer acts as a decoder. Another salient feature of BERT is that is uses the masked LM strategy. This means that 15% of the tokens are masked and BERT predicts these tokens on the basis of their surrounding unmasked tokens.
 
 
