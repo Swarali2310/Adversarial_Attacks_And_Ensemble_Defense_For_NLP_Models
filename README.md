@@ -140,8 +140,8 @@ Following is the table for Training HyperParameter used:
 
 
 ### Ensemble Model
-
-### Experimental Results
+* As we understood with our evaluation of above models and their accuracies under the attacks, it is clear that any single BERT model can't withstand or good enough to tackle the attack. It is also learnt from the text fooler paper [add reference], that with overall perturbations less than 20% the accuracies of the state-of-the-art models drop below 10%. Thus, moving towards an ensemble solution will be an ideal defense stratey to tackle such adversarial attacks.
+* However, just ensembling the state-of-the-art models may also not be the best solution with different cases. Let's demonstrate such cases below:
 
 ### Easy case
 * We consider the easy case as when the attacking is benign or not sufficient enough to misguide the models. Below shows the models classifying the sentence correctly marking the attack as failed
