@@ -20,7 +20,8 @@ BERT uses the transformer architecture, but only the encoder part of it. BERT al
 
 ### Proposed Design
 
-<img width="400" alt="final1" src="https://user-images.githubusercontent.com/14026267/206037991-742dbb37-335c-4e94-9311-bdbcf3a5ac39.png">
+<img width="467" alt="final2" src="https://user-images.githubusercontent.com/14026267/206038861-7aa8d53a-cd1b-4338-80fb-f4a546940644.png">
+
 
 The design takes into account various component which are called Models in our project. One is DataSet Model that will return different type of dataset we want to train our model. Next is the our Attack Model in which we define our TextFooler attack. We have a Transformer that loads Auto Tokenizer and Model to attack which then is passed onto the HuggingFace ModelWrapper used for this project. We then build the model on the attack and run our attacker model for final evalution.
 
