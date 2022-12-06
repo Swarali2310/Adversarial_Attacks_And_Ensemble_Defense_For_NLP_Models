@@ -89,17 +89,17 @@ All the experiments were performed on top of HuggingFace transformers library (h
  
 ### Sample Comparison of 2 models behaviours against text fooler attack on IMDB dataset
 #### Easy Case - when the models disagree
-#### BERT uncased
+##### BERT uncased
 <img src=images/f1.png align=center>
 
-#### RoBERTa base
+##### RoBERTa base
 <img src=images/f2.png align=center>
 
 #### Hard Case - when the models agree
-#### BERT uncased
+##### BERT uncased
 <img src=images/f3.png align=center>
 
-#### RoBERTa base
+##### RoBERTa base
 <img src=images/f4.png align=center>
 
 ### Analysis on Text fooler attack performance
