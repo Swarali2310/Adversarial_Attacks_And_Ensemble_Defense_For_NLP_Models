@@ -73,35 +73,6 @@ The [Yelp Dataset](https://huggingface.co/datasets/yelp_polarity) consists of re
 |The food is good. Unfortunately the service is very hit or miss. The main issue seems to be with the... | 1
 |Even when we didn't have a car Filene's Basement was worth the bus trip to the Waterfront. I always ... | 2
 
-### Evaluated Models
-<img src=images/BDA-model.png align=center width="750" height="500">
-
-### Libraries and Hyper parameters used
-All the experiments were performed on top of HuggingFace transformers library (https://huggingface.co/)
-* All the models have been trained on Google Colab and Kaggle with accelerator GPU P100
-* The training hyperparameters used for different flavours of BERT models :
-   * Training batch size - 128
-   * Number of Epochs - 3
-   * Labels - 2
-   * Maximum Sequence Length - 64 / 2480 (on the basis of IMDB \ Yelp)
-   * Evaluation Size - 1000
-   * Samples evaluated after attack - 100
- 
-### Sample Comparison of 2 models behaviours against text fooler attack on IMDB dataset
-#### Easy Case - when the models disagree
-##### BERT uncased
-<img src=images/f1.png align=center>
-
-##### RoBERTa base
-<img src=images/f2.png align=center>
-
-#### Hard Case - when the models agree
-##### BERT uncased
-<img src=images/f3.png align=center>
-
-##### RoBERTa base
-<img src=images/f4.png align=center>
-
 ### Analysis on Text fooler attack performance
 Text fooler attack performance can be varied based on different parameters like similarity threshold, word embedding distance, number of perturbed words etc. As part of this project, a study on text fooler attack performance is performed under different settings like max number of perturbed words, word embedding distance, allowed similarity of adversarial sentence by cosine similarity, under pre-transformations and search methods.
 
@@ -167,10 +138,29 @@ Following is the table for Training HyperParameter used:
 | Max Sequence Length               |      64/2480 |
 
 
+#### Accuracy Analysis (YELP and BERT)
+
+
+|Model                      |Accuracy before attack(%)|Average after attack(%)  |Run Time|
+|---------------------------|------------------------ |-------------------------|-------------------------|
+| Bert on YELP Polarity     |        92.78            |     8.00                |  4 hr 30 min            |
+| RoBERTa base              |        94.27            |     6.00                |  3 hr                   |
+| XLnet BERT                |        93.93            |     4.00                |  3 hr 30 min            |
+| Distil RoBERTa            |        93.6             |     2.00                |  1 hr 33 min            |
+| BERT on Amazon Polarity   |        93.28            |     1.00                |  3 hr                   |
+| BERT uncased              |        92.9             |     0.2                 |  2 hr 30 min            |
+| BERT cased                |        93.08            |     0.0                 |  3 hr                   |
+| AlBERT base               |        91.00            |     0.0                 |  3 hr                   |
+| Tiny BERT                 |        88.34            |     0.0                 |  17 min                 |
+| BERT multilingual         |        91.59            |     0.0                 |  1 hr 49 min            |
+
+
+
+
 
 ### Ensemble Model
-* As we understood with our evaluation of above models and their accuracies under the attacks, it is clear that any single BERT model can't withstand or good enough to tackle the attack. It is also learnt from the text fooler paper [add reference], that with overall perturbations less than 20% the accuracies of the state-of-the-art models drop below 10%. Thus, moving towards an ensemble solution will be an ideal defense stratey to tackle such adversarial attacks.
-* However, just ensembling the state-of-the-art models may also not be the best solution with different cases. Let's demonstrate such cases below:
+
+### Experimental Results
 
 ### Easy case
 * We consider the easy case as when the attacking is benign or not sufficient enough to misguide the models. Below shows the models classifying the sentence correctly marking the attack as failed
