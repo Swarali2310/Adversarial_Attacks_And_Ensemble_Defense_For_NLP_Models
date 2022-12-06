@@ -76,6 +76,29 @@ The [Yelp Dataset](https://huggingface.co/datasets/yelp_polarity) consists of re
 ### Evaluated Models
 <img src=images/BDA-model.png align=center width="750" height="500">
 
+### Libraries and Hyper parameters used
+All the experiments were performed on top of HuggingFace transformers library (https://huggingface.co/)
+* All the models have been trained on Google Colab and Kaggle with accelerator GPU P100
+* The training hyperparameters used for different flavours of BERT models :
+ * Training batch size - 128
+ * Number of Epochs - 3
+ * Labels - 2
+ * Maximum Sequence Length - 64 / 2480 (on the basis of IMDB \ Yelp)
+ * Evaluation Size - 1000
+ * Samples evaluated after attack - 100
+ 
+### Sample Comparison of 2 models behaviours against text fooler attack on IMDB dataset
+#### Easy Case - when the models disagree
+##### BERT uncased
+<img src=images/f1.png align=center>
+##### RoBERTa base
+<img src=images/f2.png align=center>
+
+#### Hard Case - when the models agree
+##### BERT uncased
+<img src=images/f3.png align=center>
+##### RoBERTa base
+<img src=images/f4.png align=center>
 
 ### Analysis on Text fooler attack performance
 Text fooler attack performance can be varied based on different parameters like similarity threshold, word embedding distance, number of perturbed words etc. As part of this project, a study on text fooler attack performance is performed under different settings like max number of perturbed words, word embedding distance, allowed similarity of adversarial sentence by cosine similarity, under pre-transformations and search methods.
