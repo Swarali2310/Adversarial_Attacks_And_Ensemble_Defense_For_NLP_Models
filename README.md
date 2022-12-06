@@ -91,12 +91,14 @@ All the experiments were performed on top of HuggingFace transformers library (h
 #### Easy Case - when the models disagree
 #### BERT uncased
 <img src=images/f1.png align=center>
+
 #### RoBERTa base
 <img src=images/f2.png align=center>
 
 #### Hard Case - when the models agree
 #### BERT uncased
 <img src=images/f3.png align=center>
+
 #### RoBERTa base
 <img src=images/f4.png align=center>
 
