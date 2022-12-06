@@ -8,6 +8,9 @@ There is sample literature exploring adversarial attacks on image deep neural ne
 ### BERT Architecture
 BERT stands for Bidirectional Encoder Representations from Transformers. It is a deep learning based unsupervised language model developed by researchers at Google AI. 
 
+<img src=images/bert_arch.png align=center>
+<!-- ![](images/bert_arch.png) -->
+
 *What is meant by bidirectional?*
 
 Up until the conception of BERT, all models either read sentences from left to right or right to left which limited the context in which each word of the sentence was viewed. BERT is bidirectional or more precisely non-directional as it considers all surrounding words as context without being biased to any direction.
@@ -55,6 +58,34 @@ The [Yelp Dataset](https://huggingface.co/datasets/yelp_polarity) consists of re
 |Friendly staff, same starbucks fair you get anywhere else. Sometimes the lines can get long.            | 2
 |The food is good. Unfortunately the service is very hit or miss. The main issue seems to be with the... | 1
 |Even when we didn't have a car Filene's Basement was worth the bus trip to the Waterfront. I always ... | 2
+
+### Performance of Text fooler attack
+Text fooler attack shows a lot of variation in it's performance by tweaking constraints like Max words perturbed, edit distance, cosine similarity, performing pre-transformations and also search methods. 
+Max words perturbed constraint basically represents a maximum allowed perturbed words. With increase in perturbation, there would be a significant change in the characters in the words or even the whole words which would result in misclassification by the model. Hence, accuracy under attack reduces. Table below shows the accuracy under attack(%) and average perturbed word(%) by tweaking Max words perturbed for IMDB dataset. 
+|Max_Words_Perturbed(%)|Accuracy under attack(%)|Average perturbed word(%)|
+|----------------------|------------------------|-----------------|
+| 0.0001               |        60              |      0          |
+| 0.01                 |        60              |      0          |
+| 0.75                 |        10              |      28.86      |
+
+Similarly by varying levenshtein distance(number of deletions, insertions or substituions required to transform the original review to the review after attack) placing the other constraints constant, accuracy of models under attack increases.Table below shows the accuracy under attack(%) and average perturbed word(%) by tweaking levenshtein distance. 
+|Levenshtein distance|Accuracy under attack(%)|Average perturbed word(%)|
+|--------------------|------------------------|-------------------------|
+| 12                 |        0              |      9.37                |
+| 30                 |        40              |     1.41                |
+| 50                 |        45              |     0.83                |
+
+By performing pre-transformations which includes inserting spaces or a character at the beginning or at the end and also deleting characters, context of the sentence changes which results in misclassification by the model that would result in decrease in accuracy under attack.Table below shows the accuracy under attack(%) and average perturbed word(%) before and after the pre-transformation.
+|Pre-transformation|Accuracy under attack(%)|Average perturbed word(%)|
+|------------------|------------------------|-------------------------|
+| Before           |        70              |     0.38                |
+| After            |        20              |     1.1                 |
+
+By varying search methods from Greedy search to greedy word swap also will have an influence on the accuracy under attack.Greedy search method greedily chooses from a list of possible perturbations.This is implemented by calling "Beam search" with beam_width set to 1 where as Greedy word swap greedily chooses from a list of possible perturbations in the order of index, after ranking indices by importance. It uses wir method for ranking the importance.Table below shows the accuracy under attack(%) for greedy search and greedy word swap search methods.
+|Search method      |Accuracy under attack(%)|
+|------------------ |------------------------|
+| Greedy search     |        60              |  
+| Greedy word swap  |        70              | 
 <!-- ### Data snippet
 
 |  **Review**   |  **Sentiment**    |                          |
