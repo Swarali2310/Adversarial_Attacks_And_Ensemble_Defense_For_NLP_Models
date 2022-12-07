@@ -228,6 +228,8 @@ With the above defined set of constraints, the accuracy of the models are evalua
 
 
 Thus we can see that Roberta, Xlnet, Bert base uncased, and Alberta are performing well with the set of attack constraints. To extend these models to be more generic, we evaluated on the pretrained models from huggingface. The models are also evaluated on YELP dataset to be more generic. The accuracy of the models vary as below:
+
+
 | Model                   | Accuracy drop on IMDB (%) |  Accuracy drop on YELP (%) |
 |-------------------------|---------------------------|----------------------------|
 | ALBERTa base            |          0                |             0              |
