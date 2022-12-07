@@ -237,6 +237,7 @@ Thus we can see that Roberta, Xlnet, Bert base uncased, and Alberta are performi
 | BERT base uncased       |          4                |             8              |
 | XLNet base cased        |          26               |             24             |
 
+
 It can be observed that the XLNet base cased models fails with the pretrained models dropping large accuracy under the attack. The other models Alberta, Roberta, and Bert base uncased perform relatively same. Hence an ensemble solution of these models would be a good defense strategy for the textfooler attacking and adversarial examples.
 
 A majority voting of these models would work for final decision. The advantages of the diversity of these models in ensemble solution would help to arrive at a final correct classification label. Please find the below sample where the adversarial sample is classified wrongly by Bert-base-uncased, but identified by Roberta and Alberta models proving the ensembling a good strategy.
