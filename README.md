@@ -175,10 +175,10 @@ The above tables provides us an information on various bert models there accurac
 
 
 ### Ensemble Model
-* As we understood with our evaluation from the above models and their accuracies under the attacks, it is clear that any single BERT model can't withstand or good enough to defend the attacks. It is also learnt from the text fooler paper [add reference], with perturbations even less than 20%, the accuracies of the state-of-the-art models drop below 10%. Thus, moving towards an ensemble solution will be an ideal defense stratey to tackle such adversarial attacks. However, just ensembling the state-of-the-art models may also not be the best solution. Let's take a look at such cases below where ensemble might not be of help:
+As we understood with our evaluation from the above models and their accuracies under the attacks, it is clear that any single BERT model can't withstand or good enough to defend the attacks. It is also learnt from the text fooler paper [add reference], with perturbations even less than 20%, the accuracies of the state-of-the-art models drop below 10%. Thus, an ensemble solution will be an ideal defense strategy to tackle adversarial attacks. However, just ensembling the state-of-the-art models may also not be the best solution. Let's take a look at such cases where ensemble might not be of help:
 
 ### Easy case
-* Easy case is considered when the attacking is benign or not sufficient enough to misguide the models. Below samples from our experiments show that the models correctly classify the sentences, marking the attack as failed.
+Easy case is considered when the attacking is benign or not sufficient enough to misguide the models. Below samples from our experiments show that the models correctly classify the sentences, marking the attack as failed.
 
 * Bert-base-uncased
 <img src=images/bert-easy.PNG align=center>
@@ -190,7 +190,7 @@ The above tables provides us an information on various bert models there accurac
 <img src=images/roberta-easy.PNG align=center>
 
 ### Hard case
-* Hard case is considered when the attacking is clever enough with replacing the words and misguiding the models. However, humans can observe the overall context of the sentences being preserved and can classify the sentences correctly. In that case, the models are completely failing illustrating the hardness of the attack. Below samples illustrate such attacking examples which are misclassifed by the models:
+Hard case is considered when the attacking is clever enough with replacing the words and misguiding the models. However, humans can observe the overall context of the sentences being preserved and can classify the sentences correctly. In that case, the models are completely failing illustrating the hardness of the attack. Below samples illustrate such attacking examples which are misclassifed by the models:
 
 * Bert-base-uncased
 <img src=images/bert-hard.PNG align=center>
@@ -200,6 +200,17 @@ The above tables provides us an information on various bert models there accurac
 
 * Roberta-base
 <img src=images/Roberta-hard.PNG align=center>
+
+Ensemble solution thus, may not help with the cases where individual classifiers can itself handle the attack (mild-attack) (or) where all the models collectively fail (harsh-attack). These cases may not be ideal real-world scenario and not targetted as part of our solution. Our defense strategy is to handle the case where few models can misclassify the adversarial example while they are rescued by other models in the ensemble for correct classification. To reflect (or) create such attack, we fine-tuned and selected the constraints for the textfooler from our experiments, ensuring that 1 in 10 words is replaced and are not discernible by humans.
+
+| Constraint                 |     Value        | 
+|----------------------------|------------------|  
+| Max Words Perturbed        |     0.1          |
+| Levenshtein Distance       |     12           |
+| Embedding cosine similarity|     0.7          |
+| Search method              | Greedy Word Swap |
+| Pre-transformations        |    False         |
+
 
 ### Medium case - When few of the models used in ensemble failed to defend the attack
 Bert-base-uncased
