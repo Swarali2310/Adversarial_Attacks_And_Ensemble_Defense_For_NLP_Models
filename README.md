@@ -251,6 +251,7 @@ A majority voting of these models would work for final decision. The advantages 
 <img src=images/roberta-medium.PNG align=center>
 
 ### Conclusion
-Overall, the project has specifically targetted to study adversarial NLP examples and textfooler attacking model. Different BERT models have been studied, experimented, and evalauted to converge an ensemble solution that provides a good defense strategy against the textfooler attack.
+Overall, the project has specifically targetted to study adversarial NLP examples and TextFooler attacking model. Different BERT models have been studied, experimented, and evalauted to converge an ensemble solution that provides a good defense strategy against the textfooler attack.
 
 ### References
+* [Jin, D., Jin, Z., Zhou, J.T. and Szolovits, P., 2020, April. Is bert really robust? a strong baseline for natural language attack on text classification and entailment. In Proceedings of the AAAI conference on artificial intelligence (Vol. 34, No. 05, pp. 8018-8025).](https://arxiv.org/pdf/1907.11932.pdf)
