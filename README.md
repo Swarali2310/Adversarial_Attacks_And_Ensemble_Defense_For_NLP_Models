@@ -226,10 +226,25 @@ With the above defined set of constraints, the accuracy of the models are evalua
 | BERT IMDB Hidden        |          80                |             54             |        26     |
 
 
-### Medium case - When few of the models used in ensemble failed to defend the attack
-Bert-base-uncased
+Thus we can see that Roberta, Xlnet, Bert base uncased, and Alberta are performing well with the set of attack constraints. To extend these models to be more generic, we evaluated on the pretrained models from huggingface. The models are also evaluated on YELP dataset to be more generic. The accuracy of the models vary as below:
+| Model                   | Accuracy drop on IMDB (%) |  Accuracy drop on YELP (%) |
+|-------------------------|---------------------------|----------------------------|
+| ALBERTa base            |          0                |             0              |
+| RoBERTa cased           |          0                |             0              |
+| BERT base uncased       |          4                |             8              |
+| XLNet base cased        |          26               |             24             |
+
+It can be observed that the XLNet base cased models fails with the pretrained models dropping large accuracy under the attack. The other models Alberta, Roberta, and Bert base uncased perform relatively same. Hence an ensemble solution of these models would be a good defense strategy for the textfooler attacking and adversarial examples.
+
+A majority voting of these models would work for final decision. The advantages of the diversity of these models in ensemble solution would help to arrive at a final correct classification label. Please find the below sample where the adversarial sample is classified wrongly by Bert-base-uncased, but identified by Roberta and Alberta models proving the ensembling a good strategy.
+
+### Ensemble Model illustraing the majority voting of the models
+
+* Bert-base-uncased
 <img src=images/bert-medium.PNG align=center>
-Alberta-base-cased
+
+* Alberta-base-cased
 <img src=images/alberta-medium.PNG align=center>
-Roberta-base
+
+* Roberta-base
 <img src=images/roberta-medium.PNG align=center>
