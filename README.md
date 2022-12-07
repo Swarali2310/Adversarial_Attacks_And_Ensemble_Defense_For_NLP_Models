@@ -8,7 +8,9 @@ There is sample literature exploring adversarial attacks on image deep neural ne
 ### BERT Architecture
 BERT stands for Bidirectional Encoder Representations from Transformers. It is a deep learning based unsupervised language model developed by researchers at Google AI. 
 
-<img src=images/bert_arch.png align=center>
+![image](https://user-images.githubusercontent.com/14026267/206089581-1c1f6077-c09b-43a7-9446-ab179348ee51.png)
+
+<!--img src=images/bert_arch.png align=center-->
 
 *What is meant by bidirectional?*
 
@@ -184,25 +186,37 @@ As we understood with our evaluation from the above models and their accuracies 
 Easy case is considered when the attacking is benign or not sufficient enough to misguide the models. Below samples from our experiments show that the models correctly classify the sentences, marking the attack as failed.
 
 * Bert-base-uncased
-<img src=images/bert-easy.PNG align=center>
+![image](https://user-images.githubusercontent.com/14026267/206089662-700540b4-c78d-46c3-8d3e-f3cc512c79d0.png)
+
+<!---img src=images/bert-easy.PNG align=center-->
 
 * Alberta-base-cased
-<img src=images/alberta-easy.PNG align=center>
+![image](https://user-images.githubusercontent.com/14026267/206089721-58ee71f7-5684-473e-b9b4-7041b2b4ba9c.png)
+
+<!---img src=images/alberta-easy.PNG align=center-->
 
 * Roberta-base
-<img src=images/roberta-easy.PNG align=center>
+![image](https://user-images.githubusercontent.com/14026267/206089764-9ebafc74-8247-40ea-a224-81102d97e5ea.png)
+
+<!--img src=images/roberta-easy.PNG align=center-->
 
 ### Hard case
 Hard case is considered when the attacking is clever enough with replacing the words and misguiding the models. However, humans can observe the overall context of the sentences being preserved and can classify the sentences correctly. In that case, the models are completely failing illustrating the hardness of the attack. Below samples illustrate such attacking examples which are misclassifed by the models:
 
 * Bert-base-uncased
-<img src=images/bert-hard.PNG align=center>
+![image](https://user-images.githubusercontent.com/14026267/206089824-e502d685-c328-4e1f-9a05-d02693d8f2f9.png)
+
+<!--img src=images/bert-hard.PNG align=center-->
 
 * Alberta-base-cased
-<img src=images/alberta-base-hard.PNG align=center>
+![image](https://user-images.githubusercontent.com/14026267/206089859-d93b4b7d-c343-4d62-81cd-85a2e51f6a58.png)
+
+<!--img src=images/alberta-base-hard.PNG align=center-->
 
 * Roberta-base
-<img src=images/Roberta-hard.PNG align=center>
+![image](https://user-images.githubusercontent.com/14026267/206089910-b94dfc7c-ace8-4b61-8c55-14f589b1bd8f.png)
+
+<!--img src=images/Roberta-hard.PNG align=center-->
 
 Ensemble solution thus, may not help with the cases where individual classifiers can themselves defend against the attack (mild-attack) (or) where all the models collectively fail to classify correctly (harsh-attack). These cases may not be ideal real-world scenario and not targetted as part of our solution. Our defense strategy is to handle the case where few models can misclassify the adversarial example while they are rescued by other models in the ensemble for correct classification. To reflect (or) create such attack, we fine-tuned and selected the constraints for the textfooler from our experiments, ensuring that 1 in 10 words is replaced and are not discernible by humans.
 
@@ -247,13 +261,19 @@ A majority voting of these models would work for final decision. The advantages 
 ### Ensemble Model illustraing the majority voting of the models
 
 * Bert-base-uncased
-<img src=images/bert-medium.PNG align=center>
+![image](https://user-images.githubusercontent.com/14026267/206089947-e2c7b6b5-5adc-4f4e-b955-0cf694989032.png)
+
+<!--img src=images/bert-medium.PNG align=center-->
 
 * Alberta-base-cased
-<img src=images/alberta-medium.PNG align=center>
+![image](https://user-images.githubusercontent.com/14026267/206089981-87a088a5-c736-42e1-9da1-85f2002b287c.png)
+
+<!--img src=images/alberta-medium.PNG align=center-->
 
 * Roberta-base
-<img src=images/roberta-medium.PNG align=center>
+![image](https://user-images.githubusercontent.com/14026267/206090022-09ade935-587e-4c3b-8df2-7837fec6e232.png)
+
+<!--img src=images/roberta-medium.PNG align=center-->
 
 ### Conclusion
 Overall, the project has specifically targetted to study adversarial NLP examples and TextFooler attacking model. Different BERT models have been studied, experimented, and evalauted to converge an ensemble solution that provides a good defense strategy against the textfooler attack.
