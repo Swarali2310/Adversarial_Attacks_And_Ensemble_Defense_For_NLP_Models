@@ -117,7 +117,7 @@ We analyzed various Bert Models on two dataset mainly YELP Polarity and IMDB. Th
 <img width="704" alt="final4" src="https://user-images.githubusercontent.com/14026267/206046775-7d2075f3-2f4d-459b-b91e-ba265e63560f.png">
 
 #### Training Summary of BERT Models
-Traning of these models was one of the most importasnt part of this project and we did spend fair amount of time on that. Following are the details on how our training of these Bert Model took place:
+Traning of these models was one of the most important part of this project and we did spend fair amount of time on that. Following are the details on how our training of these Bert Model took place:
 
 |System Paramter            |                                                              |
 |---------------------------|--------------------------------------------------------------|
