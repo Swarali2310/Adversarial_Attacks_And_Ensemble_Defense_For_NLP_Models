@@ -201,7 +201,7 @@ Hard case is considered when the attacking is clever enough with replacing the w
 * Roberta-base
 <img src=images/Roberta-hard.PNG align=center>
 
-Ensemble solution thus, may not help with the cases where individual classifiers can itself handle the attack (mild-attack) (or) where all the models collectively fail (harsh-attack). These cases may not be ideal real-world scenario and not targetted as part of our solution. Our defense strategy is to handle the case where few models can misclassify the adversarial example while they are rescued by other models in the ensemble for correct classification. To reflect (or) create such attack, we fine-tuned and selected the constraints for the textfooler from our experiments, ensuring that 1 in 10 words is replaced and are not discernible by humans.
+Ensemble solution thus, may not help with the cases where individual classifiers can themselves defend against the attack (mild-attack) (or) where all the models collectively fail to classify correctly (harsh-attack). These cases may not be ideal real-world scenario and not targetted as part of our solution. Our defense strategy is to handle the case where few models can misclassify the adversarial example while they are rescued by other models in the ensemble for correct classification. To reflect (or) create such attack, we fine-tuned and selected the constraints for the textfooler from our experiments, ensuring that 1 in 10 words is replaced and are not discernible by humans.
 
 | Constraint                 |     Value        | 
 |----------------------------|------------------|  
@@ -210,6 +210,20 @@ Ensemble solution thus, may not help with the cases where individual classifiers
 | Embedding cosine similarity|     0.7          |
 | Search method              | Greedy Word Swap |
 | Pre-transformations        |    False         |
+
+### Experimental Analysis for Ensemble Solution
+With the above defined set of constraints, the accuracy of the models are evaluated under the attack. These models are fine-tuned on IMDB dataset and evaluated on the same. The difference in accuracies of these models before and after the attack are as follows:
+
+| Model                   | Accuracy before attack(%)  |  Accuracy after attack(%)  | Accuracy Drop |  
+|-------------------------|----------------------------|----------------------------|---------------|  
+| RoBERTa base            |          92                |             88             |        4      |
+| XLNet base cased        |          90                |             82             |        8      |
+| BERT base uncased       |          88                |             80             |        8      |
+| AlBERTa base            |          88                |             76             |        12     |
+| DistilBERT base uncased |          90                |             78             |        12     |
+| BERT fine tuned         |          86                |             74             |        12     |
+| XLM RoBERTa             |          96                |             80             |        16     |
+| BERT IMDB Hidden        |          80                |             54             |        26     |
 
 
 ### Medium case - When few of the models used in ensemble failed to defend the attack
