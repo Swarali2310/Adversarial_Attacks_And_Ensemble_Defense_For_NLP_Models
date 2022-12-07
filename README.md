@@ -140,9 +140,9 @@ Following is the table for Training HyperParameter used:
 
 #### Accuracy Analysis (YELP and BERT)
 
-on YELP Dataset 
+#### YELP Dataset 
 
-|Model                      |Accuracy before attack(%)|Average after attack(%)  |Run Time|
+|Model                      |Accuracy before attack(%)|Accuracy after attack(%) |Run Time|
 |---------------------------|------------------------ |-------------------------|-------------------------|
 | Bert on YELP Polarity     |        92.78            |     8.00                |  4 hr 30 min            |
 | RoBERTa base              |        94.27            |     6.00                |  3 hr                   |
@@ -155,11 +155,10 @@ on YELP Dataset
 | Tiny BERT                 |        88.34            |     0.0                 |  17 min                 |
 | BERT multilingual         |        91.59            |     0.0                 |  1 hr 49 min            |
 
-The above table basically provides 
 
-on IMDB Dataset 
+#### IMDB Dataset 
 
-|Model                      |Accuracy before attack(%)|Average after attack(%)  |Run Time|
+|Model                      |Accuracy before attack(%)|Accuracy after attack(%) |Run Time|
 |---------------------------|------------------------ |-------------------------|-------------------------|
 | Bert on YELP Polarity     |        81.76            |     0.00                |  12 min                 |
 | RoBERTa base              |        86.75            |     1.00                |  13 min                 |
@@ -172,6 +171,7 @@ on IMDB Dataset
 | Tiny BERT                 |        75.36            |     0.0                 |  1 min                  |
 | BERT multilingual         |        91.94            |     5.0                 |  1 hr                   |
 
+The above tables provides us an information on various bert models there accuracy before the attack and after attack. We also did an analysis on both training and testing run time. For YELP Dataset Bert of YELP Polarity gives the best accuracy after attack that is around 8 percent. As Bert on YELP Polarity was trained for YELP Polarity dataset only it was expected that attack model will work best on that. However, for IMDB Dataset BERT multilingual gave best accuracy after attack that is 5 percent. We also concluded that for both YELP and IMDB dataset Tiny Bert takes least amount of training run time. This is maninly because of architecture of tiny bert with less layers in the network. 
 
 
 ### Ensemble Model
