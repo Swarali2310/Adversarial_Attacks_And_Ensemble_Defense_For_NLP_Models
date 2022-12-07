@@ -175,7 +175,7 @@ The above tables provides us an information on various bert models there accurac
 
 
 ### Ensemble Model
-As we understood with our evaluation from the above models and their accuracies under the attacks, it is clear that any single BERT model can't withstand or good enough to defend the attacks. It is also learnt from the text fooler paper [add reference], with perturbations even less than 20%, the accuracies of the state-of-the-art models drop below 10%. Thus, an ensemble solution will be an ideal defense strategy to tackle adversarial attacks. However, just ensembling the state-of-the-art models may also not be the best solution. Let's take a look at such cases where ensemble might not be of help:
+As we understood with our evaluation from the above models and their accuracies under the attacks, it is clear that any single BERT model can't withstand or good enough to defend the attacks. It is also learnt from the text fooler paper, with perturbations even less than 20%, the accuracies of the state-of-the-art models drop below 10%. Thus, an ensemble solution will be an ideal defense strategy to tackle adversarial attacks. However, just ensembling the state-of-the-art models may also not be the best solution. Let's take a look at such cases where ensemble might not be of help:
 
 ### Easy case
 Easy case is considered when the attacking is benign or not sufficient enough to misguide the models. Below samples from our experiments show that the models correctly classify the sentences, marking the attack as failed.
@@ -248,3 +248,8 @@ A majority voting of these models would work for final decision. The advantages 
 
 * Roberta-base
 <img src=images/roberta-medium.PNG align=center>
+
+### Conclusion
+Overall, the project has specifically targetted to study adversarial NLP examples and textfooler attacking model. Different BERT models have been studied, experimented, and evalauted to converge an ensemble solution that provides a good defense strategy against the textfooler attack.
+
+### References
