@@ -175,11 +175,10 @@ The above tables provides us an information on various bert models there accurac
 
 
 ### Ensemble Model
-
-### Experimental Results
+* As we understood with our evaluation from the above models and their accuracies under the attacks, it is clear that any single BERT model can't withstand or good enough to defend the attacks. It is also learnt from the text fooler paper [add reference], with perturbations even less than 20%, the accuracies of the state-of-the-art models drop below 10%. Thus, moving towards an ensemble solution will be an ideal defense stratey to tackle such adversarial attacks. However, just ensembling the state-of-the-art models may also not be the best solution. Let's take a look at such cases below where ensemble might not be of help:
 
 ### Easy case
-* We consider the easy case as when the attacking is benign or not sufficient enough to misguide the models. Below shows the models classifying the sentence correctly marking the attack as failed
+* Easy case is considered when the attacking is benign or not sufficient enough to misguide the models. Below samples from our experiments show that the models correctly classify the sentences, marking the attack as failed.
 
 * Bert-base-uncased
 <img src=images/bert-easy.PNG align=center>
@@ -191,8 +190,7 @@ The above tables provides us an information on various bert models there accurac
 <img src=images/roberta-easy.PNG align=center>
 
 ### Hard case
-* Hard case is considered when the attacking is clever with replacing the words and misguiding the models
-* However, the humans can observe the overall context of the sentences is preserved and can classify correctly illustrating the hardness of the attack. Below shows the samples of such attacking examples misclassifed by the considered models
+* Hard case is considered when the attacking is clever enough with replacing the words and misguiding the models. However, humans can observe the overall context of the sentences being preserved and can classify the sentences correctly. In that case, the models are completely failing illustrating the hardness of the attack. Below samples illustrate such attacking examples which are misclassifed by the models:
 
 * Bert-base-uncased
 <img src=images/bert-hard.PNG align=center>
