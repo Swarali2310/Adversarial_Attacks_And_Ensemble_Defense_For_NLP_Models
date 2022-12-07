@@ -34,7 +34,7 @@ Here is an example as quoted in the paper. The first sentence is classified as n
 
 ![image](https://user-images.githubusercontent.com/14026267/206089214-319fe55f-7eff-4d9d-a0a6-7bf78fb0b412.png)
 
-//<img src="/images/textfooler_example.png" align=center>
+<!--img src="/images/textfooler_example.png" align=center--->
 
 ### IMDB Movie Reviews Dataset
 The [IMDB Dataset](https://huggingface.co/datasets/imdb) has 50k movie reviews for natural language processing or Text Analytics. This dataset is for binary sentiment classification containing substantially more data than the previous bench marks datasets. It contains a set of 25k highly polar movie reviews for training and 25k for testing.
