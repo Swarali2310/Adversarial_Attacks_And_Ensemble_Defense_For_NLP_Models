@@ -255,3 +255,7 @@ Overall, the project has specifically targetted to study adversarial NLP example
 
 ### References
 * [Jin, D., Jin, Z., Zhou, J.T. and Szolovits, P., 2020, April. Is bert really robust? a strong baseline for natural language attack on text classification and entailment. In Proceedings of the AAAI conference on artificial intelligence (Vol. 34, No. 05, pp. 8018-8025).](https://arxiv.org/pdf/1907.11932.pdf)
+* [Morris, J.X., Lifland, E., Yoo, J.Y., Grigsby, J., Jin, D. and Qi, Y., 2020. Textattack: A framework for adversarial attacks, data augmentation, and adversarial training in nlp. arXiv preprint arXiv:2005.05909.](https://arxiv.org/pdf/2005.05909.pdf)
+* [Li, L., Ma, R., Guo, Q., Xue, X. and Qiu, X., 2020. Bert-attack: Adversarial attack against bert using bert. arXiv preprint arXiv:2004.09984.](https://arxiv.org/pdf/2004.09984.pdf)
+* [Zhang, X., Zhao, J. and LeCun, Y., 2015. Character-level convolutional networks for text classification. Advances in neural information processing systems, 28.](https://proceedings.neurips.cc/paper/2015/file/250cf8b51c773f3f8dc8b4be867a9a02-Paper.pdf)
+* [Maas, A., Daly, R.E., Pham, P.T., Huang, D., Ng, A.Y. and Potts, C., 2011, June. Learning word vectors for sentiment analysis. In Proceedings of the 49th annual meeting of the association for computational linguistics: Human language technologies (pp. 142-150).](https://aclanthology.org/P11-1015.pdf)
