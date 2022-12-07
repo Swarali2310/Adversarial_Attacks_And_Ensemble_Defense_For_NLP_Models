@@ -32,7 +32,7 @@ TextFooler is an adversarial attack technique which identifies the most importan
 
 Here is an example as quoted in the paper. The first sentence is classified as negative. The TextFooler model identifies that the words contrived, situations and totally might be the most contributing words to this label. It then replaces these words as shown and the classifier model ends up classifying this new sentence with a positive label.
 
-<img src=images/textfooler_example.png align=center>
+<img src=/images/textfooler_example.png align=center>
 
 ### IMDB Movie Reviews Dataset
 The [IMDB Dataset](https://huggingface.co/datasets/imdb) has 50k movie reviews for natural language processing or Text Analytics. This dataset is for binary sentiment classification containing substantially more data than the previous bench marks datasets. It contains a set of 25k highly polar movie reviews for training and 25k for testing.
