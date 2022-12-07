@@ -17,7 +17,7 @@ Up until the conception of BERT, all models either read sentences from left to r
 
 BERT uses the transformer architecture, but only the encoder part of it. BERT also has a very unique way of representing embeddings. Apart from token embeddings which are somewhat common across all NLP applications, there are also segment and position embeddings. Segment embeddings indicate which sentence the current token is part of. Position embeddings indicate the relative position of the token in the entire sequence. Like I mentioned before, BERT doesn’t use the decoder of the transformer architecture. Instead, in the text classification case for example, the classifier layer acts as a decoder. Another salient feature of BERT is that is uses the masked LM strategy. This means that 15% of the tokens are masked and BERT predicts these tokens on the basis of their surrounding unmasked tokens.
 
-<href src=https://arxiv.org/pdf/1810.04805.pdf>Reference to the BERT paper</href>
+[Reference to the BERT paper](https://arxiv.org/pdf/1810.04805.pdf)
 
 ### Proposed Design
 
